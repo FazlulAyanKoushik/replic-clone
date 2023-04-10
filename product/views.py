@@ -1,42 +1,45 @@
 """
     Views for Product, Tag and TagConnector connector models
 """
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from product.models import Product, Tag, TagConnector
+
 from drf_yasg.utils import swagger_auto_schema
+
+from rest_framework import status
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAdminUser
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from product.models import Product, Tag, TagConnector
 from product.serializers import (
     ProductSerializer,
     SecondaryProductSerializer,
     ProductDetailSerializer,
     TagSerializer,
-    TagConnectorSerializer
-)
-from rest_framework.decorators import permission_classes
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
-from django.core.paginator import (
-    Paginator,
-    EmptyPage,
-    PageNotAnInteger
+    TagConnectorSerializer,
 )
 
 
 # Create your views here.
 class ProductList(APIView):
     """List all Products, or create a new Product."""
+
     serializer_class = SecondaryProductSerializer
 
     def get(self, request, format=None):
-        query = request.query_params.get('keyword')
-        if query is None:
-            query = ''
+        products = (
+            Product.objects.select_related("category")
+            .prefetch_related("tagconnector_set__tag")
+            .filter()
+            .order_by("id")
+        )
+        name = request.query_params.get("name", "")
+        if name:
+            products = products.filter(name__icontains=name)
 
-        products = Product.objects.filter(name__icontains=query).order_by('id')
-
-        page = request.query_params.get('page')
+        page = request.query_params.get("page")
         paginator = Paginator(products, 5)
 
         try:
@@ -52,19 +55,19 @@ class ProductList(APIView):
         page = int(page)
 
         serializer = self.serializer_class(products, many=True)
-        return Response({
-            'products': serializer.data,
-            'page': page,
-            'pages': paginator.num_pages
-        }, status.HTTP_200_OK)
+        return Response(
+            {"products": serializer.data, "page": page, "pages": paginator.num_pages},
+            status.HTTP_200_OK,
+        )
 
 
 class TopProducts(APIView):
     """get all top-rated products"""
+
     serializer_class = SecondaryProductSerializer
 
     def get(self, request, format=None):
-        products = Product.objects.filter(rating__gte=4).order_by('-rating')[:5]
+        products = Product.objects.filter(rating__gte=4).order_by("-rating")[:5]
         serializer = self.serializer_class(products, many=True)
         return Response(serializer.data, status.HTTP_200_OK)
 
@@ -72,6 +75,7 @@ class TopProducts(APIView):
 @permission_classes([IsAdminUser])
 class ProductCreate(APIView):
     """Create product by admin user"""
+
     serializer_class = ProductSerializer
 
     @swagger_auto_schema(
@@ -87,6 +91,7 @@ class ProductCreate(APIView):
 
 class ProductDetail(APIView):
     """Retrieve a product detail"""
+
     serializer_class = ProductDetailSerializer
 
     def get_object(self, slug):
@@ -104,6 +109,7 @@ class ProductDetail(APIView):
 @permission_classes([IsAdminUser])
 class ProductUpdateDelete(APIView):
     """Product update and delete by admin"""
+
     serializer_class = ProductSerializer
 
     def get_object(self, slug):
@@ -128,9 +134,9 @@ class ProductUpdateDelete(APIView):
     def delete(self, request, slug, format=None):
         product = self.get_object(slug)
         product.delete()
-        return Response({
-            'msg': "Product Deleted successfully"
-        }, status.HTTP_204_NO_CONTENT)
+        return Response(
+            {"msg": "Product Deleted successfully"}, status.HTTP_204_NO_CONTENT
+        )
 
 
 """Tag Views"""
@@ -139,6 +145,7 @@ class ProductUpdateDelete(APIView):
 @permission_classes([IsAdminUser])
 class TagList(APIView):
     """List all tags, or create a new tag."""
+
     serializer_class = TagSerializer
 
     def get(self, request, format=None):
@@ -160,6 +167,7 @@ class TagList(APIView):
 @permission_classes([IsAdminUser])
 class TagDetail(APIView):
     """Retrieve, update or delete a tag instance."""
+
     serializer_class = TagSerializer
 
     def get_object(self, slug):
@@ -187,9 +195,9 @@ class TagDetail(APIView):
     def delete(self, request, slug, format=None):
         tag = self.get_object(slug)
         tag.delete()
-        return Response({
-            'msg': "Tag Deleted successfully"
-        }, status=status.HTTP_204_NO_CONTENT)
+        return Response(
+            {"msg": "Tag Deleted successfully"}, status=status.HTTP_204_NO_CONTENT
+        )
 
 
 """Product Tag Connector Views"""
@@ -197,6 +205,7 @@ class TagDetail(APIView):
 
 class TagConnectorList(APIView):
     """List all tag connector, or create a new tag connector."""
+
     serializer_class = TagConnectorSerializer
 
     def get(self, request, format=None):
@@ -217,6 +226,7 @@ class TagConnectorList(APIView):
 
 class TagConnectorDetail(APIView):
     """Retrieve, update or delete a tag connector instance."""
+
     serializer_class = TagConnectorSerializer
 
     def get_object(self, pk):
@@ -244,6 +254,7 @@ class TagConnectorDetail(APIView):
     def delete(self, request, pk, format=None):
         product_tag = self.get_object(pk)
         product_tag.delete()
-        return Response({
-            'msg': "Tag connector Deleted successfully"
-        }, status=status.HTTP_204_NO_CONTENT)
+        return Response(
+            {"msg": "Tag connector Deleted successfully"},
+            status=status.HTTP_204_NO_CONTENT,
+        )

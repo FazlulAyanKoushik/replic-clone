@@ -7,7 +7,7 @@ from product import views
 app_name = 'product'
 
 urlpatterns = [
-    # Product  urls
+    # Product urls
     path('list/', views.ProductList.as_view(), name='list'),
     path('create/', views.ProductCreate.as_view(), name='create'),
     path('top/rated/', views.TopProducts.as_view(), name='top-rated'),
