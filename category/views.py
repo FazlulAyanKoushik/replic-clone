@@ -2,22 +2,23 @@
     views for Category and Discount
 """
 from django.http import Http404
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
-from product.models import Product
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAdminUser
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from category.models import Category, Discount
 from category.serializers import CategorySerializer, DiscountSerializer
+from product.models import Product
 from product.serializers import ProductSerializer
-
-from rest_framework.decorators import permission_classes
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from drf_yasg.utils import swagger_auto_schema
 
 
 # Create your views here.
 class CategoryList(APIView):
     """List all categories or create a new category."""
+
     serializer_class = CategorySerializer
 
     def get(self, request):
@@ -46,6 +47,7 @@ class CategoryProductsBySlug(APIView):
 @permission_classes([IsAdminUser])
 class CategoryCreate(APIView):
     """Create a category by Admin."""
+
     serializer_class = CategorySerializer
 
     @swagger_auto_schema(
@@ -62,6 +64,7 @@ class CategoryCreate(APIView):
 
 class CategoryDetail(APIView):
     """Retrieve a category instance."""
+
     serializer_class = CategorySerializer
 
     def get_object(self, slug):
@@ -79,6 +82,7 @@ class CategoryDetail(APIView):
 @permission_classes([IsAdminUser])
 class CategoryUpdateDelete(APIView):
     """Retrieve, update or delete a category instance."""
+
     serializer_class = CategorySerializer
 
     def get_object(self, slug):
@@ -103,9 +107,9 @@ class CategoryUpdateDelete(APIView):
         # delete a category by admin user
         category = self.get_object(slug)
         category.delete()
-        return Response({
-            'msg': 'Deleted successfully.'
-        }, status=status.HTTP_204_NO_CONTENT)
+        return Response(
+            {"msg": "Deleted successfully."}, status=status.HTTP_204_NO_CONTENT
+        )
 
 
 """Discount Views"""
@@ -116,6 +120,7 @@ class DiscountList(APIView):
     """
     List all snippets, or create a new Discount.
     """
+
     serializer_class = DiscountSerializer
 
     def get(self, request, format=None):
@@ -139,6 +144,7 @@ class DiscountDetail(APIView):
     """
     Retrieve, update or delete a discount instance.
     """
+
     serializer_class = DiscountSerializer
 
     def get_object(self, slug):
@@ -170,6 +176,6 @@ class DiscountDetail(APIView):
             product.discount_price = None
             product.save()
         discount.delete()
-        return Response({
-            'msg': 'Discount deleted successfully'
-        }, status=status.HTTP_204_NO_CONTENT)
+        return Response(
+            {"msg": "Discount deleted successfully"}, status=status.HTTP_204_NO_CONTENT
+        )

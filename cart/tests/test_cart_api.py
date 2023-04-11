@@ -1,21 +1,23 @@
 """
     Test Cart APIs
 """
+from decimal import Decimal
+
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
-from rest_framework.test import APIClient
 from rest_framework import status
-from product.models import Product
-from category.models import Category
+from rest_framework.test import APIClient
+
 from cart.models import Cart
 from cart.serializers import CartSerializer
-from django.contrib.auth import get_user_model
-from decimal import Decimal
+from category.models import Category
+from product.models import Product
 
 User = get_user_model()
 
-CART_LIST_URL = reverse('cart:list')
-CART_ITEM_URL = reverse('cart:item')
+CART_LIST_URL = reverse("cart:list")
+CART_ITEM_URL = reverse("cart:item")
 
 
 def create_user(**payload):
@@ -36,24 +38,21 @@ class PrivateCartTest(TestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.user = create_user(email='user@example.com', password='userpass')
-        self.category = create_category(name='Category')
+        self.user = create_user(email="user@example.com", password="userpass")
+        self.category = create_category(name="Category")
         self.client.force_authenticate(user=self.user)
 
     def test_get_cart(self):
         """Test getting cart"""
         product1 = create_product(
-            name='Test product',
+            name="Test product",
             category=self.category,
             price="10.00",
             discount_price="5",
-            stock=10
+            stock=10,
         )
         product2 = create_product(
-            name='Test product2',
-            category=self.category,
-            price="10.00",
-            stock=10
+            name="Test product2", category=self.category, price="10.00", stock=10
         )
         cart1 = Cart.objects.create(user=self.user, item=product1, quantity=3)
         cart2 = Cart.objects.create(user=self.user, item=product2, quantity=2)
@@ -66,17 +65,13 @@ class PrivateCartTest(TestCase):
     def test_add_to_cart(self):
         """Test adding an item to the cart"""
         product = create_product(
-            name='Test product',
+            name="Test product",
             category=self.category,
             price="10.00",
             discount_price="5",
-            stock=10
+            stock=10,
         )
-        payload = {
-            "product_slug": product.slug,
-            "quantity": 2,
-            "action": "inc"
-        }
+        payload = {"product_slug": product.slug, "quantity": 2, "action": "inc"}
         response = self.client.post(CART_ITEM_URL, payload)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -89,18 +84,14 @@ class PrivateCartTest(TestCase):
     def test_remove_from_cart(self):
         """Test adding an item to the cart"""
         product = create_product(
-            name='Test product',
+            name="Test product",
             category=self.category,
             price="10.00",
             discount_price="5",
-            stock=10
+            stock=10,
         )
         cart = Cart.objects.create(user=self.user, item=product, quantity=3)
-        payload = {
-            "product_slug": product.slug,
-            "quantity": 2,
-            "action": "dec"
-        }
+        payload = {"product_slug": product.slug, "quantity": 2, "action": "dec"}
         response = self.client.post(CART_ITEM_URL, payload)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -113,19 +104,14 @@ class PrivateCartTest(TestCase):
     def test_cart_with_product_discount_price(self):
         """Test adding an item to the cart with a discount price"""
         product = create_product(
-            name='Test product',
+            name="Test product",
             category=self.category,
             price="10.00",
             discount_price="5",
-            stock=10
+            stock=10,
         )
-        payload = {
-            "product_slug": product.slug,
-            "quantity": 2,
-            "action": "inc"
-        }
+        payload = {"product_slug": product.slug, "quantity": 2, "action": "inc"}
         response = self.client.post(CART_ITEM_URL, payload)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['total_price'], Decimal('10.00'))
-
+        self.assertEqual(response.data["total_price"], Decimal("10.00"))

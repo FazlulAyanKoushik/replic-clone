@@ -12,7 +12,7 @@ class CartSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Cart
-        fields = '__all__'
+        fields = "__all__"
 
     def get_total_price(self, obj):
         return obj.get_total_price()
