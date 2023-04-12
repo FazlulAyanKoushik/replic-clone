@@ -32,11 +32,11 @@ urlpatterns = [
     path("__debug__/", include("debug_toolbar.urls")),
     # App urls
     path("admin/", admin.site.urls),
-    path("api/user/", include("accounts.urls")),
-    path("api/category/", include("category.urls")),
-    path("api/review/", include("review.urls")),
-    path("api/product/", include("product.urls")),
-    path("api/cart/", include("cart.urls")),
-    path("api/order/", include("order.urls")),
+    path("api/users/", include("accounts.urls")),
+    path("api/categories/", include("category.urls")),
+    path("api/reviews/", include("review.urls")),
+    path("api/products/", include("product.urls")),
+    path("api/carts/", include("cart.urls")),
+    path("api/orders/", include("order.urls")),
     path("api/shipping/address/", include("shipping_address.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

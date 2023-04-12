@@ -27,6 +27,7 @@ class CartList(APIView):
 
     def get(self, request, format=None):
         """Get a cart list for authenticated user"""
+
         try:
             carts = Cart.objects.select_related("item").filter(user=request.user)
             serializer = self.serializer_class(carts, many=True)

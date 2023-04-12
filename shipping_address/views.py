@@ -54,4 +54,6 @@ class ShippingAddressDetail(APIView):
     def delete(self, request, format=None):
         shipping_address = ShippingAddress.objects.get(user=request.user)
         shipping_address.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(
+            {"msg": "Shipping address deleted."}, status=status.HTTP_204_NO_CONTENT
+        )
