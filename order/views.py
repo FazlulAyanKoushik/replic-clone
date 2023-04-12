@@ -1,21 +1,20 @@
 """
     Views for Order
 """
-import json
+
+from datetime import datetime
 
 from django.http import Http404
-from django.shortcuts import get_object_or_404
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from cart.models import Cart
 from order.models import Order
-from shipping_address.models import ShippingAddress
 from order.serializers import OrderSerializer
-
-from rest_framework.decorators import permission_classes
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from shipping_address.models import ShippingAddress
 
 
 # Create your views here
@@ -73,5 +72,116 @@ class OrderList(APIView):
         order.save()
 
         serializer = OrderSerializer(order)
-        print("order data : ", serializer.data)
-        return Response({"order": serializer.data}, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@permission_classes([IsAuthenticated])
+class OrderDetail(APIView):
+    """
+    Retrieve a order instance.
+    """
+
+    serializer_class = OrderSerializer
+
+    def get_object(self, uuid):
+        try:
+            return Order.objects.get(uuid=uuid)
+        except Order.DoesNotExist:
+            raise Http404
+
+    def get(self, request, uuid, format=None):
+        order = self.get_object(uuid)
+        serializer = self.serializer_class(order)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+"""
+    Order Views for Admin User
+"""
+
+
+@permission_classes([IsAdminUser])
+class AdminOrderList(APIView):
+    """Get all orders for admin user"""
+
+    serializer_class = OrderSerializer
+
+    def get(self, request, format=None):
+        """get all orders for admin user"""
+        orders = (
+            Order.objects.select_related("shipping_address")
+            .prefetch_related("order_items")
+            .filter()
+        )
+        serializer = self.serializer_class(orders, many=True)
+        return Response(serializer.data, status.HTTP_200_OK)
+
+
+@permission_classes([IsAdminUser])
+class AdminOrderDetail(APIView):
+    """Get any order detail for admin user by uuid"""
+
+    serializer_class = OrderSerializer
+
+    def get_object(self, uuid):
+        """Helper method to get a single object"""
+        try:
+            return Order.objects.get(uuid=uuid)
+        except Order.DoesNotExist:
+            raise Http404
+
+    def get(self, request, uuid, format=None):
+        order = self.get_object(uuid)
+        serializer = self.serializer_class(order)
+        return Response(serializer.data)
+
+    def delete(self, request, uuid, format=None):
+        order = self.get_object(uuid)
+        order.delete()
+        return Response(
+            {"msg": "Order deleted successfully"}, status=status.HTTP_204_NO_CONTENT
+        )
+
+
+@permission_classes([IsAdminUser])
+class UpdateOrderToPaid(APIView):
+    """Update order payment status"""
+
+    serializer_class = OrderSerializer
+
+    def get_object(self, uuid):
+        """Helper method to get a single object"""
+        try:
+            return Order.objects.get(uuid=uuid)
+        except Order.DoesNotExist:
+            raise Http404
+
+    def put(self, request, uuid, format=None):
+        """update order payment status"""
+        order = self.get_object(uuid)
+        order.is_paid = True
+        order.paid_at = datetime.now()
+        order.save()
+        return Response({"message": "Order paid"}, status=status.HTTP_200_OK)
+
+
+@permission_classes([IsAdminUser])
+class UpdateOrderToDelivered(APIView):
+    """Update order deliver status"""
+
+    serializer_class = OrderSerializer
+
+    def get_object(self, uuid):
+        """Helper method to get a single object"""
+        try:
+            return Order.objects.get(uuid=uuid)
+        except Order.DoesNotExist:
+            raise Http404
+
+    def put(self, request, uuid, format=None):
+        """update order deliver status"""
+        order = self.get_object(uuid)
+        order.is_delivered = True
+        order.delivered_At = datetime.now()
+        order.save()
+        return Response({"message": "Order delivered"}, status=status.HTTP_200_OK)

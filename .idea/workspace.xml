@@ -5,36 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2991f252-6fa3-441e-9fa3-19aa60c0276e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/repliq.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/order/signals.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shipping_address/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shipping_address/serializers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shipping_address/tests/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shipping_address/tests/test_shipping_address.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shipping_address/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/cart/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart/tests/test_cart_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/cart/tests/test_cart_api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/cart/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/category/tests/test_category_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/category/tests/test_category_api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/category/tests/test_discount_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/category/tests/test_discount_api.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/category/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/category/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/order/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/order/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/migrations/0002_alter_orderitem_order.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/migrations/0003_rename_delivered_at_order_delivered_at_and_more.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/order/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/order/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/order/tests/test_order_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/order/tests/test_order_api.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/order/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/order/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/order/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/order/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shipping_address/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/shipping_address/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shipping_address/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shipping_address/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/shipping_address/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +93,8 @@
       <updated>1681097508069</updated>
       <workItem from="1681097509072" duration="21097000" />
       <workItem from="1681183065208" duration="4925000" />
-      <workItem from="1681188327203" duration="13488000" />
+      <workItem from="1681188327203" duration="14116000" />
+      <workItem from="1681269796189" duration="18971000" />
     </task>
     <servers />
   </component>

@@ -14,6 +14,11 @@ from category.serializers import CategorySerializer, DiscountSerializer
 from product.models import Product
 from product.serializers import ProductSerializer
 
+import logging
+
+logger = logging.getLogger(__name__)
+logger.warning("hello world")
+
 
 # Create your views here.
 class CategoryList(APIView):
