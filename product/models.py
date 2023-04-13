@@ -32,6 +32,8 @@ class Product(models.Model):
         """
         if self.category is not None:
             try:
+                # category = Category.objects.get(pk=self.category_id)
+                # discounts = category.discounts.filter()
                 discount = Discount.objects.get(category=self.category)
             except Discount.DoesNotExist:
                 pass

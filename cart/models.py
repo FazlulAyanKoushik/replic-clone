@@ -10,8 +10,8 @@ User = get_user_model()
 
 
 class Cart(BaseModel):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_carts')
-    item = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='carts')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_carts")
+    item = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="carts")
     quantity = models.PositiveIntegerField(default=1)
 
     def get_total_price(self):
@@ -21,4 +21,4 @@ class Cart(BaseModel):
             return self.item.price * self.quantity
 
     def __str__(self):
-        return f"Customer :{{self.user}}, - Item: {{self.item.name}}"
+        return f"Customer :{self.user}, - Item: {self.item.name}"

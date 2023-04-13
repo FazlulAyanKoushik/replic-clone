@@ -17,7 +17,6 @@ from product.serializers import ProductSerializer
 import logging
 
 logger = logging.getLogger(__name__)
-logger.warning("hello world")
 
 
 # Create your views here.
@@ -76,6 +75,7 @@ class CategoryDetail(APIView):
         try:
             return Category.objects.get(slug=slug)
         except Category.DoesNotExist:
+            logger.warning("Category not Found")
             raise Http404
 
     def get(self, request, slug):
