@@ -14,20 +14,20 @@ from product.models import Product
 
 User = get_user_model()
 
-DISCOUNT_LIST_URL = reverse("category:discount-list")
-DISCOUNT_ADD_URL = reverse("category:discount-add")
+DISCOUNT_LIST_URL = reverse("admin-discount:discount-list")
+DISCOUNT_ADD_URL = reverse("admin-discount:discount-add")
 
 
 def discount_detail(discount_slug):
-    return reverse("category:discount-detail", args=[discount_slug])
+    return reverse("admin-discount:discount-detail", args=[discount_slug])
 
 
 def discount_update(discount_slug):
-    return reverse("category:discount-update", args=[discount_slug])
+    return reverse("admin-discount:discount-update", args=[discount_slug])
 
 
 def discount_delete(discount_slug):
-    return reverse("category:discount-delete", args=[discount_slug])
+    return reverse("admin-discount:discount-delete", args=[discount_slug])
 
 
 def create_discount(**payload):

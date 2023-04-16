@@ -12,7 +12,7 @@ from category.serializers import CategorySerializer
 from product.models import Product
 
 CATEGORY_LIST_URL = reverse("category:category-list")
-CATEGORY_ADD_URL = reverse("category:category-add")
+CATEGORY_ADD_URL = reverse("admin-category:category-add")
 
 
 def create_user(**payload):
@@ -27,12 +27,12 @@ def category_detail_url(slug):
 
 def category_update_url(slug):
     """category update url"""
-    return reverse("category:category-update", args=[slug])
+    return reverse("admin-category:category-update", args=[slug])
 
 
 def category_delete_url(slug):
     """category delete url"""
-    return reverse("category:category-delete", args=[slug])
+    return reverse("admin-category:category-delete", args=[slug])
 
 
 def create_category(**payload):
