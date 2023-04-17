@@ -182,6 +182,6 @@ class UpdateOrderToDelivered(APIView):
         """update order deliver status"""
         order = self.get_object(uuid)
         order.is_delivered = True
-        order.delivered_At = datetime.now()
+        order.delivered_at = datetime.now()
         order.save()
         return Response({"message": "Order delivered"}, status=status.HTTP_200_OK)

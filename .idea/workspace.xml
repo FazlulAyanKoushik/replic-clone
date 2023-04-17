@@ -5,7 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2991f252-6fa3-441e-9fa3-19aa60c0276e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/core/category_urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/discount_urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/product_urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/tag_urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/product/migrations/0008_product_tags.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/category/tests/test_category_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/category/tests/test_category_api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/category/tests/test_discount_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/category/tests/test_discount_api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/category/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/category/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/category/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/category/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/tests/test_product_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/tests/test_product_api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/tests/test_tag_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/tests/test_tag_api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/review/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/review/urls.py" afterDir="false" />
+>>>>>>> 80b2b322ae4f91a510936dd9eb0810c56cd97b9d
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,23 +67,46 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;watcher.settings&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
-    <configuration name="runserver" type="Python.DjangoServer" factoryName="Django server">
-      <module name="repliq" />
+  <component name="RunManager" selected="Django Server.replic-clone">
+    <configuration name="replic-clone" type="Python.DjangoServer" factoryName="Django server">
+      <module name="replic-clone" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
         <env name="DJANGO_SETTINGS_MODULE" value="app.settings" />
       </envs>
-      <option name="SDK_HOME" value="D:\Projects\REPLIQ-CLONE\repliq\venv\Scripts\python.exe" />
-      <option name="SDK_NAME" value="Python 3.11 (repliq) (3)" />
+      <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="runserver" type="Python.DjangoServer" factoryName="Django server">
+      <module name="replic-clone" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="app.settings" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="launchJavascriptDebuger" value="false" />
@@ -86,8 +132,18 @@
       <workItem from="1681097509072" duration="21097000" />
       <workItem from="1681183065208" duration="4925000" />
       <workItem from="1681188327203" duration="14116000" />
+<<<<<<< HEAD
       <workItem from="1681269796189" duration="19331000" />
       <workItem from="1681356430966" duration="544000" />
+=======
+      <workItem from="1681269796189" duration="18971000" />
+      <workItem from="1681309186002" duration="505000" />
+      <workItem from="1681309704820" duration="5084000" />
+      <workItem from="1681319403419" duration="3446000" />
+      <workItem from="1681357409371" duration="14794000" />
+      <workItem from="1681614691534" duration="1333000" />
+      <workItem from="1681616872023" duration="22727000" />
+>>>>>>> 80b2b322ae4f91a510936dd9eb0810c56cd97b9d
     </task>
     <servers />
   </component>

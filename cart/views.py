@@ -27,6 +27,7 @@ class CartList(APIView):
 
     def get(self, request, format=None):
         """Get a cart list for authenticated user"""
+
         try:
             carts = Cart.objects.select_related("item").filter(user=request.user)
             serializer = self.serializer_class(carts, many=True)
@@ -57,6 +58,7 @@ class CartList(APIView):
                 cart = Cart.objects.get(user=request.user, item=product)
                 cart.quantity += quantity
                 cart.save()
+
             except Cart.DoesNotExist:
                 """If adding a new product in cart item"""
                 cart = Cart.objects.create(
@@ -65,8 +67,8 @@ class CartList(APIView):
                 product.stock -= quantity
                 product.save()
 
-                serializer = self.serializer_class(cart)
-                return Response(serializer.data, status=status.HTTP_200_OK)
+            serializer = self.serializer_class(cart)
+            return Response(serializer.data, status=status.HTTP_200_OK)
 
         if action == "dec":
             """

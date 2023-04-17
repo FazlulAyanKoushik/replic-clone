@@ -4,8 +4,8 @@
 from django.urls import path
 from review import views
 
-app_name = 'review'
+app_name = "review"
 
 urlpatterns = [
-    path('add/<str:slug>/', views.CreateProductReview.as_view(), name='add-review')
+    path("<str:slug>/", views.CreateProductReview.as_view(), name="add-review")
 ]

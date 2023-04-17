@@ -3,9 +3,7 @@
 """
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
-
 from drf_yasg.utils import swagger_auto_schema
-
 from rest_framework import status
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAdminUser
@@ -19,6 +17,7 @@ from product.serializers import (
     ProductDetailSerializer,
     TagSerializer,
     TagConnectorSerializer,
+    ProductsSerializer,
 )
 
 
@@ -72,23 +71,6 @@ class TopProducts(APIView):
         return Response(serializer.data, status.HTTP_200_OK)
 
 
-@permission_classes([IsAdminUser])
-class ProductCreate(APIView):
-    """Create product by admin user"""
-
-    serializer_class = ProductSerializer
-
-    @swagger_auto_schema(
-        request_body=serializer_class,
-    )
-    def post(self, request, format=None):
-        serializer = ProductSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
 class ProductDetail(APIView):
     """Retrieve a product detail"""
 
@@ -104,100 +86,6 @@ class ProductDetail(APIView):
         product = self.get_object(slug)
         serializer = self.serializer_class(product)
         return Response(serializer.data)
-
-
-@permission_classes([IsAdminUser])
-class ProductUpdateDelete(APIView):
-    """Product update and delete by admin"""
-
-    serializer_class = ProductSerializer
-
-    def get_object(self, slug):
-        try:
-            return Product.objects.get(slug=slug)
-        except Product.DoesNotExist:
-            raise Http404
-
-    @swagger_auto_schema(
-        request_body=serializer_class,
-    )
-    def put(self, request, slug, format=None):
-        product = self.get_object(slug)
-        serializer = self.serializer_class(product, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    permission_classes([IsAdminUser])
-
-    def delete(self, request, slug, format=None):
-        product = self.get_object(slug)
-        product.delete()
-        return Response(
-            {"msg": "Product Deleted successfully"}, status.HTTP_204_NO_CONTENT
-        )
-
-
-"""Tag Views"""
-
-
-@permission_classes([IsAdminUser])
-class TagList(APIView):
-    """List all tags, or create a new tag."""
-
-    serializer_class = TagSerializer
-
-    def get(self, request, format=None):
-        tags = Tag.objects.filter()
-        serializer = self.serializer_class(tags, many=True)
-        return Response(serializer.data)
-
-    @swagger_auto_schema(
-        request_body=serializer_class,
-    )
-    def post(self, request, format=None):
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-@permission_classes([IsAdminUser])
-class TagDetail(APIView):
-    """Retrieve, update or delete a tag instance."""
-
-    serializer_class = TagSerializer
-
-    def get_object(self, slug):
-        try:
-            return Tag.objects.get(slug=slug)
-        except Tag.DoesNotExist:
-            raise Http404
-
-    def get(self, request, slug, format=None):
-        tag = self.get_object(slug)
-        serializer = self.serializer_class(tag)
-        return Response(serializer.data)
-
-    @swagger_auto_schema(
-        request_body=serializer_class,
-    )
-    def put(self, request, slug, format=None):
-        tag = self.get_object(slug)
-        serializer = self.serializer_class(tag, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request, slug, format=None):
-        tag = self.get_object(slug)
-        tag.delete()
-        return Response(
-            {"msg": "Tag Deleted successfully"}, status=status.HTTP_204_NO_CONTENT
-        )
 
 
 """Product Tag Connector Views"""
