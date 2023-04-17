@@ -6,14 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2991f252-6fa3-441e-9fa3-19aa60c0276e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/category/tests/test_category_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/category/tests/test_category_api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/category/tests/test_discount_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/category/tests/test_discount_api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/category/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/category/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/tests/test_order_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/order/tests/test_order_api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/order/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/order/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/product/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +86,8 @@
       <workItem from="1681097509072" duration="21097000" />
       <workItem from="1681183065208" duration="4925000" />
       <workItem from="1681188327203" duration="14116000" />
-      <workItem from="1681269796189" duration="18971000" />
+      <workItem from="1681269796189" duration="19331000" />
+      <workItem from="1681356430966" duration="544000" />
     </task>
     <servers />
   </component>
